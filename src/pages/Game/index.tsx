@@ -80,7 +80,7 @@ const Game = () => {
           <div className="flex flex-row sm:flex-col">
             <img src={images.die} alt="die" />
             <h1 className="text-4xl text-center text-text-h1 opacity-75 pt-4">
-              1
+              {game.currentRoll}
             </h1>
           </div>
         </section>
