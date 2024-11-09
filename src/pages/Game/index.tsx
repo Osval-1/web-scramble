@@ -2,42 +2,19 @@ import { images } from "../../assets";
 import InfoCard from "../../components/Infocard";
 import Tile from "../../components/Tile";
 import Button from "../../components/button";
-import DiceBox from "@3d-dice/dice-box";
 import { useState, useEffect, useRef } from "react";
+import { rollDie } from "../../utils/roll_die";
 
-const Dice = new DiceBox({
-  assetPath: "./public/assets/", // include the trailing backslash
-});
-
-Dice.init().then(() => {
-  Dice.roll("2d20");
-});
 const Game = () => {
-  const [rollResult, setRollResult] = useState();
-
   useEffect(() => {
-    if (!initialized.current) {
-      initialized.current = true;
-      Dice.init();
-    }
-  }, []);
+    rollDie();
+  });
 
-  const handleRoll = (e: any) => {
-    e.preventDefault();
-    // get the roll notation from the form input value
-    const notation = e.target[0].value;
-    Dice.roll(notation);
-  };
   // create an array to hold the references for each game tile
-  const initialized = useRef(false);
 
-  Dice.onRollComplete = (results: any) => {
-    console.log("results", results);
-    setRollResult(results[0].value);
-  };
   const gameArray = new Array(30).fill(0);
   return (
-    <main className="w-full  flex flex-col gap-8 px-4">
+    <main className="w-full  flex flex-col gap-8 px-4 items-center">
       <h1 className="text-2xl md:text-4xl text-center text-text-h1 opacity-75 pt-4">
         Quantum Code Breaker{" "}
       </h1>
@@ -55,13 +32,19 @@ const Game = () => {
             return <Tile key={index} />;
           })}{" "}
         </section>
-        <section className=" flex flex-row sm:flex-col gap-4 ">
+        <section className=" flex flex-col justify-between">
+         <div className="flex flex-row sm:flex-col gap-4 ">
           <InfoCard label="energy" image={images.energy} data="0/10" />
-          <InfoCard label="energy" image={images.energy} data="0/10" />
-          <InfoCard label="energy" image={images.energy} data="0/10" />
+          <InfoCard label="Tokens" image={images.coins} data="5" />
+          <InfoCard image={images.time} label="Time" data="20 Secs" />
+         </div>
+          <div className="flex flex-row sm:flex-col">
+            <img  src={images.die} alt="die"/>
+            <h1 className="text-4xl text-center text-text-h1 opacity-75 pt-4">1</h1>
+          </div>
         </section>
       </section>
-      <section className="flex flex-col sm:flex-row gap-4 sm:items-center p-4">
+      <section className="flex flex-col sm:flex-row gap-4 sm:items-center p-4 w-full">
         <div
           className="w-full h-20 sm:h-40 rounded-small mb-4 "
           style={{ backgroundColor: "#EFE9C9" }}
@@ -69,13 +52,13 @@ const Game = () => {
           0 1 0 3 0 4 0 5 6 7 8 9 0 9 0 3 4 5 6 7
         </div>
         <button
-          className="border-2 w-36 h-12"
+          className="border-2 w-40 h-12"
           style={{ borderColor: "#72D07C" }}
         >
           Gain Energy
         </button>
       </section>
-      <section className="flex flex-col sm:flex-row gap-4 sm:items-center">
+      <section className="flex flex-col sm:flex-row gap-4 sm:items-center p-4 w-full">
         <div
           className="w-full h-20 sm:h-40 rounded-md mb-4 p-4 flex "
           style={{ backgroundColor: "#EFE9C9" }}
@@ -89,7 +72,7 @@ const Game = () => {
           <img src={images.locksvg} className="w-6 h-6" alt="locks" />
           <img src={images.locksvg} className="w-6 h-6" alt="locks" />
         </div>
-        <Button label="Roll dice" color="#72D07C" />
+        <Button label="Roll dice" color="#72D07C" onclick={rollDie} />
       </section>
     </main>
   );
