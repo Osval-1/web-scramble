@@ -7,23 +7,24 @@ import { rollDie } from "../../utils/roll_die";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { createGame } from "../../utils/create_game_instance";
 import { convertToBinary } from "../../utils/convert_to_binary";
+import { updateRoll } from "../../store/slices/gameSlice";
 
 const Game = () => {
-  const [encodedMessage, setEncodedMessage] = useState("")
-  const currentPosition = useRef<any>(null);
+  const [encodedMessage, setEncodedMessage] = useState<string>("");
   const game = useAppSelector((state) => state.gameInstance);
+  const [gameProgress, setGameProgress] = useState(
+    game.decoded_message.split("")
+  );
 
   useEffect(() => {
-    rollDie();
-    createGame();
-    console.log(convertToBinary(game.decoded_message),game.decoded_message)
-    setEncodedMessage(convertToBinary(game.decoded_message))
+    setEncodedMessage(convertToBinary(game.decoded_message));
+    console.log(game)
   });
   const dispatch = useAppDispatch();
 
   const handleDieRoll = () => {
-    const currentRoll = rollDie();
-    dispatch()
+    const roll = rollDie();
+      dispatch(updateRoll(roll));
   };
 
   // create an array to hold the references for each game tile
@@ -43,9 +44,19 @@ const Game = () => {
           }}
           className=" border w-full md:w-3/4 h-screen pl-16 md:pl-16 lg:pl-28 pb-4 md:pb-12 grid grid-cols-5"
         >
-          {/* auto-cols-max */}
           {gameArray.map((itemLabel, index) => {
-            return <Tile key={index} label={itemLabel} />;
+            let TileColor =
+              index === game.currentPosition ? "#EFE9C9" : "#D9D9D9";
+            let tileBorderColor =
+              index === game.currentPosition ? "#EAA21E" : "#918C73";
+            return (
+              <Tile
+                key={index}
+                label={itemLabel}
+                color={TileColor}
+                borderColor={tileBorderColor}
+              />
+            );
           })}{" "}
         </section>
         <section className=" flex flex-col justify-between">
@@ -92,17 +103,12 @@ const Game = () => {
         <div
           className="w-full h-20 sm:h-40 rounded-md mb-4 p-4 flex "
           style={{ backgroundColor: "#EFE9C9" }}
-        >{game.decoded_message.map(()=>{})}
-          <img src={images.locksvg} className="w-6 h-6" alt="locks" />
-          <img src={images.locksvg} className="w-6 h-6" alt="locks" />
-          <img src={images.locksvg} className="w-6 h-6" alt="locks" />
-          <img src={images.locksvg} className="w-6 h-6" alt="locks" />
-          <img src={images.locksvg} className="w-6 h-6" alt="locks" />
-          <img src={images.locksvg} className="w-6 h-6" alt="locks" />
-          <img src={images.locksvg} className="w-6 h-6" alt="locks" />
-          <img src={images.locksvg} className="w-6 h-6" alt="locks" />
+        >
+          {gameProgress.map((item) => (
+            <img src={images.locksvg} className="w-6 h-6" alt="locks" />
+          ))}
         </div>
-        <Button label="Roll dice" color="#72D07C" onclick={rollDie} />
+        <Button label="Roll dice" color="#72D07C" onclick={handleDieRoll} />
       </section>
     </main>
   );

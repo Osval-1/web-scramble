@@ -1,3 +1,3 @@
-export const rollDie = () => {
-  console.log(Math.floor(Math.random() * 6) +1);
+export const rollDie = ():number => {
+  return Math.floor(Math.random() * 6) +1
 };

@@ -22,8 +22,10 @@ export const gameInstanceSlice = createSlice({
   name: "gameInstance",
   initialState,
   reducers: {
-    updateRoll: (state, action: PayloadAction<GameInstanceType>) => {
-      return action.payload;
+    updateRoll: (state, action: PayloadAction<number>) => {
+      state.energy -= 1;
+      state.currentPosition += action.payload
+      state.currentRoll = action.payload;
     },
     updateCurrentPostion: (state, action: PayloadAction<number>) => {
       state.currentPosition = action.payload;
@@ -35,7 +37,7 @@ export const gameInstanceSlice = createSlice({
       state.tokens += 1;
     },
     updateDecodedMessage: (state, action: PayloadAction<string>) => {
-        state.decoded_message = action.payload
+      state.decoded_message = action.payload;
     },
   },
 });
