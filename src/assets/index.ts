@@ -8,6 +8,8 @@ export const images = {
     coins:"../../public/svg/Coins.svg",
     stack_of_coins:"../../public/svg/Stack-of-Coins.svg",
     share:"../../public/svg/Share.svg",
+    locksvg:"../../public/svg/lock-svg.svg",
+    code:"../../public/images/code.png",
 
     
 }

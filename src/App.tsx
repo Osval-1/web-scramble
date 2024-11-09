@@ -1,18 +1,18 @@
 import { useState } from "react";
-import Button from "./components/button";
-import Card from "./components/Infocard";
-import { images } from "./assets";
-import Tile from "./components/Tile";
 import Game from "./pages/Game";
+import Setup from "./pages/Setup";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+
 
 function App() {
 
   return (
     <>
-      {/* <Button color="#72D07C" label="Play" /> */}
-      {/* <Card image={images.exclamation} label="take care" data="10/10" /> */}
-      {/* <Tile/> */}
-      <Game/>
+      <Routes>
+    <Route path="/" element={<Setup />} />
+    <Route path="/Game" element={<Game />} />
+      {/* <Game/> */}
+      </Routes>
     </>
   );
 }
