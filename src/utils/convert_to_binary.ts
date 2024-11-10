@@ -12,7 +12,7 @@ export const convertToBinary = (text:any)=> {
                 const binary = char.charCodeAt(0).toString(2);
                 return '0'.repeat(8 - binary.length) + binary;
             })
-            .join(' ');
+            .join('');
     }
     
     throw new Error('text must be a number or string');

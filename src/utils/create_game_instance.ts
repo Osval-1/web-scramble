@@ -1,3 +1,4 @@
+
 //create an instance of the game
 export const createGame = () => {
   const tileTypesArray = ["e", "q", "", "flipbit"];

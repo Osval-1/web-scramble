@@ -9,6 +9,7 @@ type GameInstanceType = {
   time: number;
   energy: number;
   decoded_message: string;
+  tileType:"e"|"q"|" "|"flipbit"
 };
 const initialState: GameInstanceType = {
   currentRoll: 1,
@@ -17,6 +18,8 @@ const initialState: GameInstanceType = {
   time: 0,
   energy: 10,
   decoded_message: "",
+  tileType:" ",
+//   gameprogress:"",
 };
 export const gameInstanceSlice = createSlice({
   name: "gameInstance",
