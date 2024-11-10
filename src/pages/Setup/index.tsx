@@ -50,17 +50,17 @@ const Setup = () => {
           cols={30}
           rows={10}
         ></textarea>
-        <h1 className="text-2xl md:text-4xl  pt-4 font-bold  w-1/2">Setup</h1>
+        <h1 className="text-2xl md:text-4xl  py-4 font-bold  w-1/2">Setup</h1>
         <section className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-          <InfoCard label="Energy" image={images.energy} data="0/10" />
+          <InfoCard label="Energy" image={images.energy} data="10/10" />
           <InfoCard label="Tokens" image={images.coins} data="5" />
           <InfoCard image={images.time} label="Time" data="20 Secs" />
           <InfoCard image={images.bait} label="Bait" data="$3" />
-          <InfoCard image={images.stack_of_coins} label="QCibs" data="3" />
+          <InfoCard image={images.stack_of_coins} label="QCibs" data="3 !" />
           <InfoCard image={images.bits} label="Max Bits" data="3" />
         </section>
       </section>
-      <section className="flex flex-row gap-4 justify-center">
+      <section className="flex flex-row gap-4 justify-center items-center">
         <Button label="Play" color="#72D07C" onclick={handlePlay} />
         <h1 className="text-2xl md:text-4xl  pt-4 font-bold">Or</h1>
         <div

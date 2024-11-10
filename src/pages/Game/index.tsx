@@ -7,44 +7,96 @@ import { rollDie } from "../../utils/roll_die";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { createGame } from "../../utils/create_game_instance";
 import { convertToBinary } from "../../utils/convert_to_binary";
-import { resetCurrentPosition, updateRoll } from "../../store/slices/gameSlice";
+import {
+  resetCurrentPosition,
+  updateRoll,
+  updateGameProgress,
+  getGameProgress,
+  addEnergy,
+  addToken,
+  flipBit,
+} from "../../store/slices/gameSlice";
+import { useNavigate } from "react-router-dom";
 import OutlineButton from "../../components/outline_button";
 import { flipRandomBit } from "../../utils/flip_random_bit";
 import { createGameProgress } from "../../utils/create_game_progress";
-import { Progress } from "../../utils/types";
 
 // create an array to hold the references for each game tile
 const gameArray = createGame();
 
 const Game = () => {
   const [encodedMessage, setEncodedMessage] = useState<string>("");
+  const [timer, setTimer] = useState(0);
   const game = useAppSelector((state) => state.gameInstance);
   const tokens = useAppSelector((state) => state.gameInstance.tokens);
   const energy = useAppSelector((state) => state.gameInstance.energy);
-  const [gameProgress, setGameProgress] = useState<Progress[]>([]);
+  const gameProgress = useAppSelector(
+    (state) => state.gameInstance.gameProgress
+  );
   const [tileType, setTileType] = useState<string>(gameArray[0]);
 
   useEffect(() => {
     setEncodedMessage(convertToBinary(game.decoded_message));
-    setGameProgress(createGameProgress(game.decoded_message));
+    dispatch(getGameProgress(createGameProgress(game.decoded_message)));
   }, []);
 
-  useEffect(() => {});
+  useEffect(() => {
+    const timerRef = setInterval(() => {
+      setTimer((prevstate) => prevstate + 1);
+    }, 1000);
+
+    return () => clearInterval(timerRef);
+  });
+
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
+  const updateProgress = (flippedIndex: number) => {
+    const newGameProgressIndex = Math.floor(flippedIndex / 8);
+    dispatch(updateGameProgress(newGameProgressIndex));
+  };
 
   const handleDieRoll = () => {
     const roll = rollDie();
     if (game.currentPosition + roll > 30) {
       dispatch(resetCurrentPosition(0));
-      setTileType(gameArray[game.currentPosition + roll]);
+      setTileType(gameArray[0]);
       return;
     }
     dispatch(updateRoll(roll));
     setTileType(gameArray[game.currentPosition + roll]);
   };
+  const handlePressOutlineButton = () => {
+    console.log(tileType);
+    if (tileType === "e") {
+      handleEnergyGain();
+      return;
+    }
+    if (tileType === "flipbit") {
+      handleFlipBit();
+      const winCondition = gameProgress.find((item) => item.flipped === false);
+      if (winCondition === undefined) {
+        navigate("/Won");
+      }
+      return;
+    }
+    if (tileType === "q") {
+      handleTokenGain();
+      return;
+    }
+  };
   const handleFlipBit = () => {
-    const flippedBit = flipRandomBit(encodedMessage);
-    console.log(flippedBit);
+    if (energy <= 0 || tokens <= 0) return;
+    const { bits, flippedIndex } = flipRandomBit(encodedMessage);
+    setEncodedMessage(bits);
+    updateProgress(flippedIndex);
+    dispatch(flipBit());
+  };
+  const handleEnergyGain = () => {
+    dispatch(addEnergy());
+  };
+  const handleTokenGain = () => {
+    dispatch(addToken());
   };
 
   return (
@@ -84,11 +136,7 @@ const Game = () => {
               data={`${energy}/10`}
             />
             <InfoCard label="Tokens" image={images.coins} data={`${tokens}`} />
-            <InfoCard
-              image={images.time}
-              label="Time"
-              data={`${game.time} Secs`}
-            />
+            <InfoCard image={images.time} label="Time" data={`${timer} Secs`} />
           </div>
           <div className="flex flex-row sm:flex-col">
             <img src={images.die} alt="die" />
@@ -100,12 +148,12 @@ const Game = () => {
       </section>
       <section className="flex flex-col sm:flex-row gap-12 sm:items-center p-4 w-full ">
         <p
-          className="w-3/4 min-h-20 sm:min-h-32 rounded-sm mb-4 font-semibold p-2 flex break-all"
+          className="w-3/4 min-h-20 sm:min-h-32 rounded-sm mb-4 font-semibold p-2 flex break-all tracking-wider"
           style={{ backgroundColor: "#EFE9C9" }}
         >
           {encodedMessage}
         </p>
-        <OutlineButton type={tileType} click={handleFlipBit} />
+        <OutlineButton type={tileType} click={handlePressOutlineButton} />
       </section>
       <section className="flex flex-col sm:flex-row gap-16 sm:items-center p-4 w-full">
         <div
@@ -113,7 +161,9 @@ const Game = () => {
           style={{ backgroundColor: "#EFE9C9" }}
         >
           {gameProgress.map((item, index) => {
-            console.log(item);
+            if (item.flipped === true) {
+              return <div key={index}>{item.letter}</div>;
+            }
             return (
               <img
                 src={images.locksvg}

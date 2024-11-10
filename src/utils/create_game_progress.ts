@@ -7,6 +7,5 @@ export const createGameProgress = (text: string) => {
       flipped: false,
     };
   });
-  console.log(splitText, gameProgress);
   return gameProgress;
 };

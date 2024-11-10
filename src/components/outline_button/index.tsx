@@ -9,7 +9,7 @@ const OutlineButton = ({ type, click }: OutlineButtonProps) => {
       className="border-2 w-40 h-12"
       style={{
         borderColor: "#72D07C",
-        display: type === "" ? "none" : "block",
+        display: type === " " ? "none" : "block",
       }}
       onClick={click}
     >
