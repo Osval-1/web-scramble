@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { FormEvent } from "react";
 import InfoCard from "../../components/Infocard";
 import { images } from "../../assets";
 import Button from "../../components/button";
@@ -15,7 +14,7 @@ const Setup = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const handleTextArea = (e) => {
+  const handleTextArea = (e:any) => {
     console.log(e.target.value);
     setText(e.target.value);
   };

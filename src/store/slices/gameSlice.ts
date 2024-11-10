@@ -27,7 +27,10 @@ export const gameInstanceSlice = createSlice({
       state.currentPosition += action.payload
       state.currentRoll = action.payload;
     },
-    updateCurrentPostion: (state, action: PayloadAction<number>) => {
+    // updateCurrentPostion: (state, action: PayloadAction<number>) => {
+    //   state.currentPosition = action.payload;
+    // },
+    resetCurrentPosition: (state, action: PayloadAction<number>) => {
       state.currentPosition = action.payload;
     },
     increaseToken: (state) => {
@@ -44,7 +47,7 @@ export const gameInstanceSlice = createSlice({
 
 export const {
   updateRoll,
-  updateCurrentPostion,
+  resetCurrentPosition,
   increaseToken,
   increaseEnergy,
   updateDecodedMessage,

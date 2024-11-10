@@ -1,8 +1,6 @@
-import * as React from "react";
 import { images } from "../../assets";
 
 type TileProps = {
-  type: "energy" | "token" | "empty" | "flipbit";
   color: string;
   borderColor:string;
   label: string;

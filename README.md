@@ -1,50 +1,40 @@
-# React + TypeScript + Vite
+### Web-Scramble Documentation
+web scramble is a web app deployed at web
+## Code structure
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
 ```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+public
+ ├── images
+ └── svg
+src
+ ├── assets
+ │   └── index.ts // for easy importtation of assests
+ │        └── ...
+ │
+ ├── components // The building blocks of the UI
+ │   ├──  Button //Basic Button to handle user interaction
+ │   │    ├── index.tsx
+ │   ├── Tile  // Tile on which the game can interact on
+ │   │    ├── index.tsx
+ │   │
+ │   ├── InfoCard // component to display various informations of the various game sessions
+ │   │    ├── index.tsx
+ │   └── ...
+ │
+ ├── pages
+ │   ├── Game.ts // page where the game is played
+ │   ├── Setup.ts // page where the user is onboarded
+ │   ├── won.ts // not implemented
+ │
+ │
+ ├── utils // utility functions which are essential for running the game
+ │   ├── convert_to_binary.ts
+ │   ├── create_game_instance.ts
+ │   └── roll_die.ts
+ │
+ ├── store // redux store to handle our global state
+ │   ├── store.ts // where redux store is initialised
+ │   └── slices // where our slices of redux state are stored
+ │           └── gameSlice.ts  //the game state is magnaged in this slice
+ │
 ```

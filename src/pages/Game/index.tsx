@@ -2,34 +2,36 @@ import { images } from "../../assets";
 import InfoCard from "../../components/Infocard";
 import Tile from "../../components/Tile";
 import Button from "../../components/button";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { rollDie } from "../../utils/roll_die";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { createGame } from "../../utils/create_game_instance";
 import { convertToBinary } from "../../utils/convert_to_binary";
-import { updateRoll } from "../../store/slices/gameSlice";
+import { resetCurrentPosition, updateRoll } from "../../store/slices/gameSlice";
+
+const gameArray = createGame();
 
 const Game = () => {
   const [encodedMessage, setEncodedMessage] = useState<string>("");
   const game = useAppSelector((state) => state.gameInstance);
-  const [gameProgress, setGameProgress] = useState(
-    game.decoded_message.split("")
-  );
+  const [gameProgress, setGameProgress] = useState<string[]>([]);
 
   useEffect(() => {
     setEncodedMessage(convertToBinary(game.decoded_message));
-    console.log(game)
-  });
+    setGameProgress(game.decoded_message.split(""));
+  }, []);
   const dispatch = useAppDispatch();
 
   const handleDieRoll = () => {
     const roll = rollDie();
-      dispatch(updateRoll(roll));
+    if (game.currentPosition > 30) {
+      dispatch(resetCurrentPosition(0));
+    }
+    dispatch(updateRoll(roll));
   };
 
   // create an array to hold the references for each game tile
 
-  const gameArray = createGame();
   return (
     <main className="w-full  flex flex-col gap-8 px-4 items-center">
       <h1 className="text-2xl md:text-4xl text-center text-text-h1 opacity-75 pt-4">
@@ -104,8 +106,13 @@ const Game = () => {
           className="w-full h-20 sm:h-40 rounded-md mb-4 p-4 flex "
           style={{ backgroundColor: "#EFE9C9" }}
         >
-          {gameProgress.map((item) => (
-            <img src={images.locksvg} className="w-6 h-6" alt="locks" />
+          {gameProgress.map((item, index) => (
+            <img
+              src={images.locksvg}
+              className="w-6 h-6"
+              alt="locks"
+              key={index + item}
+            />
           ))}
         </div>
         <Button label="Roll dice" color="#72D07C" onclick={handleDieRoll} />
