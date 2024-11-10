@@ -1,3 +1,4 @@
+// util to randomly flip bits to decode the word
 export const flipRandomBit = (bitString: string) => {
   const bits = bitString.replace(/\s/g, "").split("");
 

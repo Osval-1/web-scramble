@@ -1,3 +1,4 @@
+//util function to convert a number to a string
 export const convertToBinary = (text:any)=> {
     if (typeof text === 'number') {
         if (text < 0) {

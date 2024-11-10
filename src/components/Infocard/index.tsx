@@ -8,14 +8,14 @@ type InfoCardProps = {
 const InfoCard = ({ label, data, image }: InfoCardProps) => {
   return (
     <div
-      className="flex flex-row  border border-border-light rounded-md p-1 md:p-2.5 gap-2.5 text-sm sm:text-md items-center justify-center"
-      style={{ width: 140 }}
+      className="flex flex-row  border border-border-light rounded-md p-1.5  md:p-2.5 gap-2.5 sm:gap:2.5  items-center justify-between w-40"
+      // style={{ width: 180 }}
     >
       <figure>
         <img src={image} alt="infoCard Image" />
       </figure>
-      <p>{label}</p>
-      <p>{data}</p>
+      <p className="font-space_grotesk text-sm sm:text-md">{label}</p>
+      <p className="font-space_grotesk text-sm sm:text-md">{data}</p>
     </div>
   );
 };

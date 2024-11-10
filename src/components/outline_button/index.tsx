@@ -6,7 +6,7 @@ type OutlineButtonProps = {
 const OutlineButton = ({ type, click }: OutlineButtonProps) => {
   return (
     <button
-      className="border-2 w-40 h-12"
+      className="border-2 w-40 h-12 font-space_grotesk"
       style={{
         borderColor: "#72D07C",
         display: type === " " ? "none" : "block",

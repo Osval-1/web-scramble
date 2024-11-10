@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../store";
 import { updateDecodedMessage } from "../../store/slices/gameSlice";
 
+// setup page for the player
 const Setup = () => {
   const [text, setText] = useState<string>(
     "Enter your message to be decoded ( Leave blank for default)"
@@ -33,14 +34,14 @@ const Setup = () => {
   };
   return (
     <main className="w-screen h-full flex flex-col gap-12 px-4 items-center">
-      <h1 className="text-2xl md:text-4xl text-center text-text-h1 opacity-75 pt-4">
+      <h1 className="text-2xl md:text-4xl text-center text-text-h1 opacity-75 pt-4 font-space_grotesk">
         Quantum Code Breaker{" "}
       </h1>
       <section className="sm:w-2/3 md:w-1/2">
         <textarea
           name="input"
           value={text}
-          className="border w-full rounded-sm text-text-h1 p-4 "
+          className="border w-full rounded-sm text-text-h1 p-4 font-space_grotesk"
           style={{
             borderColor: "#E8DECF",
             backgroundColor: "#FAFAFA",
@@ -50,8 +51,8 @@ const Setup = () => {
           cols={30}
           rows={10}
         ></textarea>
-        <h1 className="text-2xl md:text-4xl  py-4 font-bold  w-1/2">Setup</h1>
-        <section className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+        <h1 className="text-2xl md:text-4xl  py-4 font-bold  w-1/2 font-space_grotesk">Setup</h1>
+        <section className="grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-16">
           <InfoCard label="Energy" image={images.energy} data="10/10" />
           <InfoCard label="Tokens" image={images.coins} data="5" />
           <InfoCard image={images.time} label="Time" data="20 Secs" />
@@ -62,9 +63,9 @@ const Setup = () => {
       </section>
       <section className="flex flex-row gap-4 justify-center items-center">
         <Button label="Play" color="#72D07C" onclick={handlePlay} />
-        <h1 className="text-2xl md:text-4xl  pt-4 font-bold">Or</h1>
+        <h1 className="text-2xl md:text-4xl  pt-4 font-bold font-space_grotesk">Or</h1>
         <div
-          className="border rounded-sm p-4 flex gap-2 font-bold"
+          className="border rounded-sm p-4 flex gap-2 font-bold font-space_grotesk"
           style={{ backgroundColor: "#F5F0E5" }}
         >
           <figure>
@@ -73,7 +74,7 @@ const Setup = () => {
           Share to someone else
         </div>
       </section>
-      <img src={images.code} alt="code" className="" />
+      <img src={images.code} alt="code" />
     </main>
   );
 };

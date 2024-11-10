@@ -14,7 +14,7 @@ const Tile = ({ label, color,borderColor }: TileProps) => {
       {label === "flipbit" ? (
         <img src={images.bits} />
       ) : (
-        <p className="font-bold">{label}</p>
+        <p className="font-bold font-space_grotesk">{label}</p>
       )}
     </div>
   );
