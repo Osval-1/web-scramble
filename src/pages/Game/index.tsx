@@ -127,9 +127,8 @@ const Game = () => {
         >
           {/* this is where the game board exists */}
           {gameArray.map((itemLabel, index) => {
-            let TileColor =
-              index === game.currentPosition ? "#EFE9C9" : "#D9D9D9";
-            let tileBorderColor =
+            const TileColor = index === game.currentPosition ? "#EFE9C9" : "#D9D9D9";
+            const tileBorderColor =
               index === game.currentPosition ? "#EAA21E" : "#918C73";
             return (
               <Tile

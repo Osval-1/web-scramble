@@ -15,7 +15,7 @@ const Setup = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const handleTextArea = (e:any) => {
+  const handleTextArea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     console.log(e.target.value);
     setText(e.target.value);
   };
@@ -24,7 +24,9 @@ const Setup = () => {
       dispatch(updateDecodedMessage("quantumrealm"));
       return;
     }
-    if (text === "Enter your message to be decoded ( Leave blank for default)") {
+    if (
+      text === "Enter your message to be decoded ( Leave blank for default)"
+    ) {
       dispatch(updateDecodedMessage("quantumrealm"));
       navigate("/Game");
       return;
@@ -41,7 +43,7 @@ const Setup = () => {
         <textarea
           name="input"
           value={text}
-          className="border w-full rounded-sm text-text-h1 p-4 font-space_grotesk"
+          className="border w-full rounded-md text-text-h1 p-4 font-space_grotesk"
           style={{
             borderColor: "#E8DECF",
             backgroundColor: "#FAFAFA",
@@ -51,7 +53,9 @@ const Setup = () => {
           cols={30}
           rows={10}
         ></textarea>
-        <h1 className="text-2xl md:text-4xl  py-4 font-bold  w-1/2 font-space_grotesk">Setup</h1>
+        <h1 className="text-2xl md:text-4xl  py-4 font-bold  w-1/2 font-space_grotesk">
+          Setup
+        </h1>
         <section className="grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-16">
           <InfoCard label="Energy" image={images.energy} data="10/10" />
           <InfoCard label="Tokens" image={images.coins} data="5" />
@@ -63,9 +67,11 @@ const Setup = () => {
       </section>
       <section className="flex flex-row gap-4 justify-center items-center">
         <Button label="Play" color="#72D07C" onclick={handlePlay} />
-        <h1 className="text-2xl md:text-4xl  pt-4 font-bold font-space_grotesk">Or</h1>
+        <h1 className="text-2xl md:text-4xl  pt-4 font-bold font-space_grotesk">
+          Or
+        </h1>
         <div
-          className="border rounded-sm p-4 flex gap-2 font-bold font-space_grotesk"
+          className="border rounded-sm p-4 flex gap-2 font-bold font-space_grotesk cursor-pointer hover:opacity-75"
           style={{ backgroundColor: "#F5F0E5" }}
         >
           <figure>

@@ -1,4 +1,4 @@
-### Web-Scramble Documentation
+# Web-Scramble Documentation
 
 web scramble is a web app which users can encode and decode words while having *Fun*
 deployed at [Web-scramble](https://web-scramble.netlify.app/)

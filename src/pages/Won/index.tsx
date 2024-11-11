@@ -28,20 +28,20 @@ const Won = () => {
       <section className="w-2/3">
         <p className="font-semibold font-space_grotesk">
           Congratulations! You've decoded the message. You've earned
-          <span className="font-bold font-space_grotesk"> 100 Qcibs. </span>
+          <span className=" font-space_grotesk font-extrabold"> 100 Qcibs. </span>
           Enter your email to claim your rewards
         </p>
       </section>
       <section className="flex flex-row gap-4 items-center">
         <div
           onClick={handleNavigate}
-          className="font-bold text-xl h-12 p-2 font-space_grotesk"
+          className="font-bold text-xl h-12 p-2 font-space_grotesk cursor-pointer"
           style={{color:"#4C473D"}}
         >
           Play Again
         </div>
         <div
-          className="border rounded-sm p-4 flex gap-2 font-bold h-12 items-center font-space_grotesk"
+          className="border rounded-sm p-4 flex gap-2 font-bold h-12 items-center font-space_grotesk cursor-pointer"
           style={{ backgroundColor: "#FAFAFA" }}
         >
           <figure>
@@ -53,7 +53,7 @@ const Won = () => {
       <section className="w-2/3 flex flex-col gap-4">
         <div className="flex ">
           <img src={images.stack_of_coins} alt="stack of coins" />
-          <p className="font-bold text-xl font-space_grotesk"> 100 Qcibs</p>
+          <p className="font-bold text-xl font-space_grotesk"> 100 Qcibs</p>
         </div>
         <label htmlFor="email">
           <input
