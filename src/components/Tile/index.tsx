@@ -8,7 +8,7 @@ type TileProps = {
 const Tile = ({ label, color,borderColor }: TileProps) => {
   return (
     <div
-      className="w-8 sm:w-16 h-8 sm:h-16 rounded-md border border-border-dark flex flex-row items-center justify-center"
+      className="z-10 w-8 sm:w-16 h-8 sm:h-16 rounded-md border border-border-dark flex flex-row items-center justify-center"
       style={{ backgroundColor: color,borderColor:borderColor}}
     >
       {label === "flipbit" ? (

@@ -32,7 +32,7 @@ const Won = () => {
           Enter your email to claim your rewards
         </p>
       </section>
-      <section className="flex flex-row gap-4 items-center">
+      <section className="flex flex-row sm:flex-row gap-4 items-center">
         <div
           onClick={handleNavigate}
           className="font-bold text-xl h-12 p-2 font-space_grotesk cursor-pointer"

@@ -13,6 +13,7 @@ export default {
         },
         text: {
           h1: "#B39D7580",
+          h2:"#4C473D"
         },
       },
     },

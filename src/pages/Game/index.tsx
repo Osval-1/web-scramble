@@ -113,18 +113,19 @@ const Game = () => {
 
   return (
     <main className="w-full  flex flex-col gap-8 px-4 items-center">
-      <h1 className="text-2xl md:text-4xl text-center text-text-h1 opacity-75 pt-4 font-space_grotesk">
+      <h1 className="text-2xl md:text-4xl text-center text-text-h1 opacity-75 pt-4 font-space_grotesk font-bold">
         Quantum Code Breaker{" "}
       </h1>
-      <section className="w-screen flex flex-col sm:flex-row gap-4 md:gap-20 ">
+      <section className="w-screen flex flex-col md:flex-row gap-4 md:gap-20 ">
         <section
-          style={{
-            backgroundImage: `url(${images.background})`,
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
-          }}
-          className=" border w-full md:w-3/4 h-screen pl-20 sm:pl-24 md:pl-24 lg:pl-32 pb-4 md:pb-12 grid grid-cols-5"
+          // style={{
+          //   backgroundImage: `url(${images.background})`,
+          //   backgroundRepeat: "no-repeat",
+          // }}
+          className="w-full md:w-3/4 min-h-screen bg-cover pl-8 md:pl-20  lg:pl-32 pb-4 md:pb-12 grid grid-cols-5"
+          // className=""
         >
+          <img src={images.background} alt="background" className="absolute z-0 w-full md:w-3/4 left-0 h-screen"/>
           {/* this is where the game board exists */}
           {gameArray.map((itemLabel, index) => {
             const TileColor = index === game.currentPosition ? "#EFE9C9" : "#D9D9D9";
@@ -142,8 +143,8 @@ const Game = () => {
         </section>
 
         {/* All the information tiles */}
-        <section className=" flex flex-col justify-between">
-          <div className="flex flex-row sm:flex-col gap-4 ">
+        <section className=" flex flex-col justify-between float-right mt-2">
+          <div className="flex flex-row md:flex-col gap-4 sm:gap-12 flex-wrap justify-center">
             <InfoCard
               label="energy"
               image={images.energy}
@@ -152,7 +153,7 @@ const Game = () => {
             <InfoCard label="Tokens" image={images.coins} data={`${tokens}`} />
             <InfoCard image={images.time} label="Time" data={`${timer} Secs`} />
           </div>
-          <div className="flex flex-row sm:flex-col">
+          <div className="flex flex-row md:flex-col justify-center items-center">
             <img src={images.die} alt="die" />
             <h1 className="text-4xl text-center text-text-h1 opacity-75 pt-4">
               {game.currentRoll}
@@ -163,7 +164,7 @@ const Game = () => {
       {/* encoded message section*/}
       <section className="flex flex-col sm:flex-row gap-12 sm:items-center p-4 w-full ">
         <p
-          className="w-3/4 min-h-20 sm:min-h-32 rounded-sm mb-4 font-semibold p-2 flex break-all tracking-widest font-space_grotesk"
+          className=" w-full sm:w-3/4 min-h-20 sm:min-h-32 rounded-sm mb-4 font-semibold p-2 flex break-all tracking-widest font-space_grotesk"
           style={{ backgroundColor: "#EFE9C9" }}
         >
           {encodedMessage}
@@ -174,7 +175,7 @@ const Game = () => {
       {/* decoded message section */}
       <section className="flex flex-col sm:flex-row gap-16 sm:items-center p-4 w-full">
         <div
-          className="w-3/4  min-h-20 sm:min-h-32 rounded-md mb-4 p-4 flex flex-wrap gap-2"
+          className="w-full sm:w-[76%]  min-h-20 sm:min-h-32 rounded-md mb-4 p-4 flex flex-wrap gap-2"
           style={{ backgroundColor: "#EFE9C9" }}
         >
           {gameProgress.map((item, index) => {

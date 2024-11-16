@@ -36,27 +36,28 @@ const Setup = () => {
   };
   return (
     <main className="w-screen h-full flex flex-col gap-12 px-4 items-center">
-      <h1 className="text-2xl md:text-4xl text-center text-text-h1 opacity-75 pt-4 font-space_grotesk">
+      <h1 className="text-2xl md:text-4xl text-center text-text-h1 opacity-75 pt-4 font-space_grotesk font-extrabold">
         Quantum Code Breaker{" "}
       </h1>
       <section className="sm:w-2/3 md:w-1/2">
         <textarea
           name="input"
           value={text}
-          className="border w-full rounded-md text-text-h1 p-4 font-space_grotesk"
+          className="border w-full rounded-md text-text-h1 p-4 font-space_grotesk font-medium"
           style={{
             borderColor: "#E8DECF",
             backgroundColor: "#FAFAFA",
             color: "#78786E",
+            letterSpacing: "5px",
           }}
           onChange={(e) => handleTextArea(e)}
           cols={30}
           rows={10}
         ></textarea>
-        <h1 className="text-2xl md:text-4xl  py-4 font-bold  w-1/2 font-space_grotesk">
-          Setup
+        <h1 className="text-2xl md:text-4xl  py-4 font-bold  w-1/2 font-space_grotesk text-text-h2">
+          Set-up
         </h1>
-        <section className="grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-16">
+        <section className="grid grid-cols-2 lg:grid-cols-3 gap-4 py-4 lg:gap-16">
           <InfoCard label="Energy" image={images.energy} data="10/10" />
           <InfoCard label="Tokens" image={images.coins} data="5" />
           <InfoCard image={images.time} label="Time" data="20 Secs" />
@@ -65,7 +66,7 @@ const Setup = () => {
           <InfoCard image={images.bits} label="Max Bits" data="3" />
         </section>
       </section>
-      <section className="flex flex-row gap-4 justify-center items-center">
+      <section className="flex flex-row sm:w-2/3 md:w-1/2 gap-4 justify-between items-center">
         <Button label="Play" color="#72D07C" onclick={handlePlay} />
         <h1 className="text-2xl md:text-4xl  pt-4 font-bold font-space_grotesk">
           Or
